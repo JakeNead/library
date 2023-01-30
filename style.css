@@ -1,6 +1,8 @@
 :root {
     --white: #fffbfb;
+    --lightGrey: #f5f5f6;
     --grey: #f0eef1;
+    --activeScale: scale(1.02);
 }
 
 * {
@@ -10,7 +12,6 @@
     font-family: 'Bitter', serif;
     font-weight: 400;
 }
-
 
 body {
     background-color: var(--grey);
@@ -32,12 +33,44 @@ header {
 
 .logo {
     font-weight: 600;
+    font-size: 2.5em;
+    cursor: pointer;
 }
 
-.headerContainer div>button {
+.logo:active {
+    -webkit-transform: var(--activeScale);
+}
+
+.btnLogIn {
     border: none;
     border-radius: 5px;
     padding: .5em .7em;
     font-size: 1.2em;
     font-weight: 500;
+    cursor: pointer;
+}
+
+.btnLogIn:active {
+    font-size: 600;
+    -webkit-transform: var(--activeScale)
+}
+
+.main {
+    height: 100vh;
+}
+
+.addBookButton {
+    text-align: center;
+    margin: 3em;
+    cursor: pointer;
+}
+
+.addBook {
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.addBook:active {
+    -webkit-transform: var(--activeScale)
 }
