@@ -1,3 +1,8 @@
+:root {
+    --white: #fffbfb;
+    --grey: #f0eef1;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -8,13 +13,13 @@
 
 
 body {
-    background-color: rgb(252, 253, 239);
+    background-color: var(--grey);
 }
 
 header {
     display: flex;
     justify-content: center;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .headerContainer {
