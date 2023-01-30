@@ -17,6 +17,11 @@ body {
     background-color: var(--grey);
 }
 
+#pageContainer {
+    position: relative;
+    min-height: 100vh;
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -55,8 +60,9 @@ header {
     -webkit-transform: var(--activeScale)
 }
 
-.main {
-    height: 100vh;
+main {
+    position: relative;
+    min-height: 80vh;
 }
 
 .addBookButton {
@@ -73,4 +79,19 @@ header {
 
 .addBook:active {
     -webkit-transform: var(--activeScale)
+}
+
+.articleContainer {
+    max-width: 1200px;
+    padding-bottom: 1.5rem;
+}
+
+
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
 }
