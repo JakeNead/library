@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;500;600;700&family=Rubik+Microbe&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -33,20 +33,19 @@
             </div>
 
             <div class="popup">
-                <form action="#">
+                <form id="addBook" action="#">
+                    <h3>Add new book</h3>
                     <label for="title"></label>
                     <input type="text" id="title" name="title" placeholder="Title" required>
-
                     <label for="author"></label>
                     <input type="text" id="author" name="author" placeholder="Author" required>
-
                     <label for="pages"></label>
-                    <input type="number" id="pages" name="pages" placeholder="Pages" required>
-
-                    <label for="Read">Have you read it?</label>
-                    <input type="checkbox" name="read" id="read">
-
-                    <button>Submit</button>
+                    <input type="number" id="pages" name="pages" placeholder="Pages" min="1" required>
+                    <div class="checkbox">
+                        <label for="Read">Have you read it?</label>
+                        <input type="checkbox" name="read" id="read">
+                    </div>
+                    <button id='submit' type="submit">Submit</button>
                 </form>
             </div>
 
