@@ -34,26 +34,14 @@ function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
   this.hasRead = hasReadBook
   return book
 }
-
-function addBookToLibrary() {
-  // take user input
-
-
-  // run constructor func
-  // push new obj to lib array
-  // return bookList.push(Book())
-}
-
 form.addEventListener('submit', (e) => {
    e.preventDefault();
   bookList.push(Book(title.value, author.value, pages.value, hasRead.checked))
-  console.log(title.value, author.value, pages.value, hasRead.checked)
-
 }
 )
 
 
-// function displayBooks() {
+// function displayNewBook() {
 
 // }
 
