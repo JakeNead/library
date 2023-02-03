@@ -1,10 +1,11 @@
-const form = document.querySelector("#addBook")
+const form = document.getElementById("addBook")
 // const inputs = document.querySelectorAll('input')
 // const submitButton = document.getElementById('submit')
 const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
 const hasRead = document.getElementById('read')
+
 
 const bookList = [{
   title: 'The Final Empire',
@@ -13,19 +14,6 @@ const bookList = [{
   hasRead: true,
 }]
 
-// {
-//   title: 'The Tao of Pooh',
-//   author: 'Benjamin Hoff',
-//   pageNumber: 158,
-//   hasRead: true,
-// },
-// {
-//   title: 'East of Eden',
-//   author: 'John Steinbeck',
-//   pageNumber: 608,
-//   hasRead: false,
-// }
-
 function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
   this.title = bookTitle
   this.author = bookAuthor
@@ -33,43 +21,53 @@ function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
   this.hasRead = hasReadBook
 }
 
+// let currentBook = {}
 
 form.addEventListener('submit', (e) => {
-   e.preventDefault();
+  e.preventDefault();
   bookList.push(new Book(title.value, author.value, pages.value, hasRead.checked));
-  const articleContainer = document.getElementsByClassName('articleContainer')
-  const newArticle = document.createElement('Article')
-  articleContainer.appendChild(newArticle)
-  const newDiv = document.createElement('div')
-  newDiv.textContent = title.value
-  newArticle.appendChild(newDiv)
-  newDiv.textContent = author.value
-  newArticle.appendChild(newDiv)
-  newDiv.textContent = pages.value
-  newArticle.appendChild(newDiv)
+  // currentBook = bookList.slice(-1)[0]
 
+    const articleContainer = document.querySelector(".articleContainer")
+    const newArticle = document.createElement("article")
+   
+    const div = document.createElement("div")
+    articleContainer.appendChild(newArticle)
+
+    // div.textContent = title.value
+    // div.setAttribute('class', 'title')
+    // newArticle.appendChild(div)
+
+    // div.textContent = author.value
+    // div.setAttribute('class', 'author')
+    // newArticle.appendChild(div)
+
+    // div.textContent = pages.value
+    // div.setAttribute('class', 'pages')
+    // newArticle.appendChild(div)
+
+
+
+    const userInputArray = [title.value, author.value, pages.value, hasRead.checked]
+    const articleClasses = ['title', 'author', 'pages', 'hasRead']
+    
+    for (let i = 0; i < userInputArray.length; i++) {
+      div.setAttribute('class', articleClasses[i])
+      div.textContent = userInputArray[i]
+      newArticle.append(div)
+      }
+    // function createContainer (val) {
+    //   div.setAttribute('class', val)
+    //   div.textContent = userInputArray[i]
+    // }
+  
+    
+  
+    console.log(userInputArray)
 }
 )
 
 
-// function displayNewBook() {
-//   bookList.forEach(obj => )
+// function addNewArticle(title, author, pages, hasRead){
+  
 // }
-
-// const articleContainer = document.getElementsByClassName('articleContainer')
-// const newArticle = document.createElement('Article')
-// articleContainer.appendChild(newArticle)
-// const newDiv = document.createElement('div')
-// newDiv.textContent = title.value
-// newArticle.appendChild(newDiv)
-// newDiv.textContent = author.value
-// newArticle.appendChild(newDiv)
-// newDiv.textContent = pages.value
-// newArticle.appendChild(newDiv)
-
-  // search for articleContainer
-  // create new article element
-  // append new article to articleContainer
-  // create new divs
-// add content to divs
-// append divs to article element
