@@ -30,44 +30,18 @@ form.addEventListener('submit', (e) => {
 
     const articleContainer = document.querySelector(".articleContainer")
     const newArticle = document.createElement("article")
-   
-    const div = document.createElement("div")
+  
     articleContainer.appendChild(newArticle)
-
-    // div.textContent = title.value
-    // div.setAttribute('class', 'title')
-    // newArticle.appendChild(div)
-
-    // div.textContent = author.value
-    // div.setAttribute('class', 'author')
-    // newArticle.appendChild(div)
-
-    // div.textContent = pages.value
-    // div.setAttribute('class', 'pages')
-    // newArticle.appendChild(div)
-
-
 
     const userInputArray = [title.value, author.value, pages.value, hasRead.checked]
     const articleClasses = ['title', 'author', 'pages', 'hasRead']
-    
+
     for (let i = 0; i < userInputArray.length; i++) {
+      const div = document.createElement("div")
       div.setAttribute('class', articleClasses[i])
       div.textContent = userInputArray[i]
       newArticle.append(div)
       }
-    // function createContainer (val) {
-    //   div.setAttribute('class', val)
-    //   div.textContent = userInputArray[i]
-    // }
   
-    
-  
-    console.log(userInputArray)
 }
 )
-
-
-// function addNewArticle(title, author, pages, hasRead){
-  
-// }
