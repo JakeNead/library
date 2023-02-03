@@ -37,11 +37,14 @@ form.addEventListener('submit', (e) => {
     const articleClasses = ['title', 'author', 'pages', 'hasRead']
 
     for (let i = 0; i < userInputArray.length; i++) {
-      const div = document.createElement("div")
+      const div = document.createElement('div')
       div.setAttribute('class', articleClasses[i])
       div.textContent = userInputArray[i]
       newArticle.append(div)
       }
-  
-}
+    const button = document.createElement('button')
+    button.setAttribute('class', 'remove')
+    button.textContent = 'Remove'
+    newArticle.append(button)
+  }
 )
