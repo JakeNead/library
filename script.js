@@ -45,6 +45,9 @@ form.addEventListener('submit', (e) => {
     newArticle.append(button)
     const popup = document.querySelector('.popup.active')
     closePopup(popup)
+    title.value = ''
+    author.value = ''
+    pages.value = ''
   }
 )
 
@@ -76,12 +79,12 @@ function closePopup(popup) {
     overlay.classList.remove('active')
 }
 
-// hide user inputs
-// add event listener to display user inputs
-// hide user inputs after submit pressed
+// ...To-Do List...
 
 // toggle the read button style/text content
 // modify the objects hasRead property
 
 // remove button removes the object from bookList array 
 // remove the article element and contents from DOM
+
+// clear user input after submit
