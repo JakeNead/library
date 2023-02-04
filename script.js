@@ -21,12 +21,9 @@ function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
   this.hasRead = hasReadBook
 }
 
-// let currentBook = {}
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   bookList.push(new Book(title.value, author.value, pages.value, hasRead.checked));
-  // currentBook = bookList.slice(-1)[0]
 
     const articleContainer = document.querySelector(".articleContainer")
     const newArticle = document.createElement("article")
@@ -48,3 +45,49 @@ form.addEventListener('submit', (e) => {
     newArticle.append(button)
   }
 )
+
+const openPopupButtons = document.querySelectorAll('[data-popup-target]')
+const closePopupButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+
+openPopupButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const popup = document.querySelector(button.dataset.popupTarget)
+    openPopup(popup)
+  })
+})
+
+overlay.addEventListener('click', () => {
+  const popups = document.querySelectorAll('.popup.active')
+  popups.forEach(popup => {
+    closePopup(popup)
+  })
+})
+
+closePopupButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const popup = button.closest('.popup')
+    closePopup(popup)
+})
+})
+
+function openPopup(popup) {
+  if (popup == null) return 
+    popup.classList.add('active')
+    overlay.classList.add('active')
+}
+function closePopup(popup) {
+  if (popup == null) return 
+    popup.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+// hide user inputs
+// add event listener to display user inputs
+// hide user inputs after submit pressed
+
+// toggle the read button style/text content
+// modify the objects hasRead property
+
+// remove button removes the object from bookList array 
+// remove the article element and contents from DOM

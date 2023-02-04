@@ -29,25 +29,26 @@
         </header>
         <main>
             <div class="addBookButton">
-                <button class="addBook" type="button">+ Add Book</button>
+                <button class="addBook" type="button" data-popup-target="#popup">+ Add Book</button>
             </div>
 
-            <div class="popup">
+            <div class="popup" id="popup">
                 <form id="addBook" action="#">
                     <h3>Add new book</h3>
                     <label for="title"></label>
-                    <input type="text" id="title" name="title" placeholder="Title" required>
+                        <input type="text" id="title" name="title" placeholder="Title" required>
                     <label for="author"></label>
-                    <input type="text" id="author" name="author" placeholder="Author" required>
+                        <input type="text" id="author" name="author" placeholder="Author" required>
                     <label for="pages"></label>
-                    <input type="number" id="pages" name="pages" placeholder="Pages" min="1" required>
+                        <input type="number" id="pages" name="pages" placeholder="Pages" min="1" required>
                     <div class="checkbox">
                         <label for="Read">Have you read it?</label>
-                        <input type="checkbox" name="read" id="read">
+                            <input type="checkbox" name="read" id="read" >
                     </div>
                     <button id='submit' type="submit">Submit</button>
                 </form>
             </div>
+            <div id="overlay"></div>
 
             <div class="articleContainer">
                 <article>
