@@ -1,11 +1,26 @@
-const form = document.getElementById("addBook")
+const form = document.getElementById('addBook')
 // const inputs = document.querySelectorAll('input')
-// const submitButton = document.getElementById('submit')
 const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
-const hasRead = document.getElementById('read')
+let hasRead = document.querySelectorAll('.hasRead')
+const remove = document.querySelectorAll('.remove')
 
+const readIt = () => {
+  hasRead = document.querySelectorAll('.hasRead')
+  hasRead.forEach(el => el.addEventListener('click', () => {
+  if (el.textContent === 'Read') {
+    el.style.backgroundColor = 'var(--red)'
+    el.textContent = 'Not Read'
+  } else {
+    el.style.backgroundColor = 'var(--green)'
+    el.textContent = 'Read'
+  } 
+  }))
+}
+
+
+readIt()
 
 const bookList = [{
   title: 'The Final Empire',
@@ -30,7 +45,7 @@ form.addEventListener('submit', (e) => {
   
     articleContainer.appendChild(newArticle)
 
-    const userInputArray = [title.value, author.value, pages.value, hasRead.checked]
+    const userInputArray = [title.value, author.value, pages.value, (hasRead.checked ? 'Read': 'Not Read')]
     const articleClasses = ['title', 'author', 'pages', 'hasRead']
 
     for (let i = 0; i < userInputArray.length; i++) {
@@ -48,9 +63,13 @@ form.addEventListener('submit', (e) => {
     title.value = ''
     author.value = ''
     pages.value = ''
+
+    readIt()
   }
 )
 
+
+// Start of popup user input code
 const openPopupButtons = document.querySelectorAll('[data-popup-target]')
 const overlay = document.getElementById('overlay')
 
@@ -78,13 +97,15 @@ function closePopup(popup) {
     popup.classList.remove('active')
     overlay.classList.remove('active')
 }
+// End of popup user input code
+
 
 // ...To-Do List...
 
 // toggle the read button style/text content
-// modify the objects hasRead property
+//    modify the bookList hasRead property
 
 // remove button removes the object from bookList array 
-// remove the article element and contents from DOM
+//    remove the article element from DOM
 
-// clear user input after submit
+// create light/dark theme button
