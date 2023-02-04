@@ -43,11 +43,12 @@ form.addEventListener('submit', (e) => {
     button.setAttribute('class', 'remove')
     button.textContent = 'Remove'
     newArticle.append(button)
+    const popup = document.querySelector('.popup.active')
+    closePopup(popup)
   }
 )
 
 const openPopupButtons = document.querySelectorAll('[data-popup-target]')
-const closePopupButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('overlay')
 
 openPopupButtons.forEach(button => {
@@ -62,13 +63,6 @@ overlay.addEventListener('click', () => {
   popups.forEach(popup => {
     closePopup(popup)
   })
-})
-
-closePopupButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const popup = button.closest('.popup')
-    closePopup(popup)
-})
 })
 
 function openPopup(popup) {
