@@ -4,9 +4,9 @@ const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
 let hasRead = document.querySelectorAll('.hasRead')
-const remove = document.querySelectorAll('.remove')
+// const remove = document.querySelectorAll('.remove')
 
-const readIt = () => {
+const hasReadItClick = () => {
   hasRead = document.querySelectorAll('.hasRead')
   hasRead.forEach(el => el.addEventListener('click', () => {
   if (el.textContent === 'Read') {
@@ -19,8 +19,18 @@ const readIt = () => {
   }))
 }
 
+// const initialReadItStyle = () => {
+// hasRead.forEach(el => {
+//   if (el.textContent === 'Read') {
+//     el.style.backgroundColor = 'var(--green)'
+//   } else {
+//     el.style.backgroundColor = 'var(--red)'
+//   } }
+// )}
 
-readIt()
+// initialReadItStyle()
+
+hasReadItClick()
 
 const bookList = [{
   title: 'The Final Empire',
@@ -63,8 +73,8 @@ form.addEventListener('submit', (e) => {
     title.value = ''
     author.value = ''
     pages.value = ''
-
-    readIt()
+    // initialReadItStyle()
+    hasReadItClick()
   }
 )
 
