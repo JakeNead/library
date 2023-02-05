@@ -62,8 +62,15 @@ form.addEventListener('submit', (e) => {
       const div = document.createElement('div')
       div.setAttribute('class', articleClasses[i])
       div.textContent = userInputArray[i]
-      newArticle.append(div)
-      }
+
+      if (div.textContent === 'Read') {
+        div.style.backgroundColor = 'var(--green)'
+        } else if (div.textContent === 'Not Read'){
+        div.style.backgroundColor = 'var(--red)'}   
+        newArticle.append(div)
+        }
+        
+
     const button = document.createElement('button')
     button.setAttribute('class', 'remove')
     button.textContent = 'Remove'
