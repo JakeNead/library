@@ -196,13 +196,21 @@ article div {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    
 }
 
 .remove {
    background-color: var(--grey); 
 }
 
+.hasRead {
+    background-color: var(--green);
+}
+
+.hasNotRead {
+    background-color: var(--red);
+}
+
+.hasNotRead:active,
 .hasRead:active,
 .remove:active {
     -webkit-transform: var(--activeScale)
