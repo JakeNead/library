@@ -6,27 +6,25 @@ const pages = document.getElementById('pages')
 const read = document.getElementById('read')
 // const remove = document.querySelectorAll('.remove')
 
-const hasReadItClick = () => {
-  hasRead = document.querySelectorAll('.hasRead')
-  hasRead.forEach(el => el.addEventListener('click', () => {
+const hasReadClick = () => {
+  const readButton = document.querySelectorAll('.readButton')
+  const el = readButton[readButton.length -1]
+  el.addEventListener('click', () => {
   if (el.textContent === 'Read') {
-    el.style.backgroundColor = 'var(--red)'
+    el.classList.remove('hasRead')
+    el.classList.add('hasNotRead')
     el.textContent = 'Not Read'
   } else {
-    el.style.backgroundColor = 'var(--green)'
+    el.classList.remove('hasNotRead')
+    el.classList.add('hasRead')
     el.textContent = 'Read'
   } 
-  }))
+  })
 }
 
-hasReadItClick()
+hasReadClick()
 
-const bookList = [{
-  title: 'The Final Empire',
-  author: 'Brandon Sanderson',
-  pageNumber: 541,
-  hasRead: true,
-}]
+const bookList = []
 
 function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
   this.title = bookTitle
@@ -36,7 +34,6 @@ function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
 }
 
 form.addEventListener('submit', (e) => {
-  console.log(form)
   e.preventDefault();
   bookList.push(new Book(title.value, author.value, pages.value, read.checked));
 
@@ -46,20 +43,14 @@ form.addEventListener('submit', (e) => {
     articleContainer.appendChild(newArticle)
 
     const userInputArray = [title.value, author.value, pages.value, (read.checked ? 'Read': 'Not Read')]
-    const articleClasses = ['title', 'author', 'pages', 'hasRead']
+    const articleClasses = ['title', 'author', 'pages', (read.checked ? 'readButton hasRead': 'readButton hasNotRead')]
 
     for (let i = 0; i < userInputArray.length; i++) {
       const div = document.createElement('div')
       div.setAttribute('class', articleClasses[i])
       div.textContent = userInputArray[i]
-
-      if (div.textContent === 'Read') {
-        div.style.backgroundColor = 'var(--green)'
-        } else if (div.textContent === 'Not Read') {
-        div.style.backgroundColor = 'var(--red)'
-        }   
-        newArticle.append(div)
-        }
+      newArticle.append(div)
+      }
         
     const button = document.createElement('button')
     button.setAttribute('class', 'remove')
@@ -72,7 +63,7 @@ form.addEventListener('submit', (e) => {
     author.value = ''
     pages.value = ''
     read.checked = false
-    hasReadItClick()
+    hasReadClick()
   }
 )
 
@@ -87,14 +78,12 @@ openPopupButtons.forEach(button => {
     openPopup(popup)
   })
 })
-
 overlay.addEventListener('click', () => {
   const popups = document.querySelectorAll('.popup.active')
   popups.forEach(popup => {
     closePopup(popup)
   })
 })
-
 function openPopup(popup) {
   if (popup == null) return 
     popup.classList.add('active')
