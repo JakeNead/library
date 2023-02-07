@@ -3,7 +3,7 @@ const form = document.getElementById('addBook')
 const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
-let hasRead = document.querySelectorAll('.hasRead')
+const read = document.getElementById('read')
 // const remove = document.querySelectorAll('.remove')
 
 const hasReadItClick = () => {
@@ -18,17 +18,6 @@ const hasReadItClick = () => {
   } 
   }))
 }
-
-// const initialReadItStyle = () => {
-// hasRead.forEach(el => {
-//   if (el.textContent === 'Read') {
-//     el.style.backgroundColor = 'var(--green)'
-//   } else {
-//     el.style.backgroundColor = 'var(--red)'
-//   } }
-// )}
-
-// initialReadItStyle()
 
 hasReadItClick()
 
@@ -47,15 +36,16 @@ function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
 }
 
 form.addEventListener('submit', (e) => {
+  console.log(form)
   e.preventDefault();
-  bookList.push(new Book(title.value, author.value, pages.value, hasRead.checked));
+  bookList.push(new Book(title.value, author.value, pages.value, read.checked));
 
     const articleContainer = document.querySelector(".articleContainer")
     const newArticle = document.createElement("article")
   
     articleContainer.appendChild(newArticle)
 
-    const userInputArray = [title.value, author.value, pages.value, (hasRead.checked ? 'Read': 'Not Read')]
+    const userInputArray = [title.value, author.value, pages.value, (read.checked ? 'Read': 'Not Read')]
     const articleClasses = ['title', 'author', 'pages', 'hasRead']
 
     for (let i = 0; i < userInputArray.length; i++) {
@@ -65,22 +55,23 @@ form.addEventListener('submit', (e) => {
 
       if (div.textContent === 'Read') {
         div.style.backgroundColor = 'var(--green)'
-        } else if (div.textContent === 'Not Read'){
-        div.style.backgroundColor = 'var(--red)'}   
+        } else if (div.textContent === 'Not Read') {
+        div.style.backgroundColor = 'var(--red)'
+        }   
         newArticle.append(div)
         }
         
-
     const button = document.createElement('button')
     button.setAttribute('class', 'remove')
     button.textContent = 'Remove'
     newArticle.append(button)
+
     const popup = document.querySelector('.popup.active')
     closePopup(popup)
     title.value = ''
     author.value = ''
     pages.value = ''
-    // initialReadItStyle()
+    read.checked = false
     hasReadItClick()
   }
 )
