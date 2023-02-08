@@ -1,10 +1,22 @@
 const form = document.getElementById('addBook')
-// const inputs = document.querySelectorAll('input')
 const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
 const read = document.getElementById('read')
-// const remove = document.querySelectorAll('.remove')
+
+const bookList = [{
+  title: 'Sample Book Title',
+  author: 'Author\'s Name',
+  pages: 1234,
+
+}]
+
+function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
+  this.title = bookTitle
+  this.author = bookAuthor
+  this.pageNumber = pageNumber
+  this.hasRead = hasReadBook
+}
 
 const hasReadClick = () => {
   const readButton = document.querySelectorAll('.readButton')
@@ -18,25 +30,29 @@ const hasReadClick = () => {
     e.classList.remove('hasNotRead')
     e.classList.add('hasRead')
     e.textContent = 'Read'
+  } 
+
+  if (e.textContent === 'Not Read') {
+    bookList[(e.parentElement.getAttribute('data-index'))].hasRead = false
+  } else if (e.textContent === 'Read') {
+    bookList[(e.parentElement.getAttribute('data-index'))].hasRead = true
   }
-  if (e.textContent === 'Read') {
-    // change bookList array to turn hasRead to false
-    // else the oposite
-  }
-  console.log(e)
   })
 }
 
 hasReadClick()
 
-const bookList = []
-
-function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
-  this.title = bookTitle
-  this.author = bookAuthor
-  this.pageNumber = pageNumber
-  this.hasRead = hasReadBook
-}
+const removeBookClick = () => {
+  const remove = document.querySelectorAll('.remove')
+  const e = remove[remove.length-1]
+  e.addEventListener('click', () => { 
+    if(confirm('Are you sure you want to permanently remove this book?')) {
+      bookList.splice(e.parentElement.getAttribute('data-index'))
+      e.parentElement.remove()
+    }
+  }
+)}
+removeBookClick()
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -71,6 +87,7 @@ form.addEventListener('submit', (e) => {
     pages.value = ''
     read.checked = false
     hasReadClick()
+    removeBookClick()
   }
 )
 
@@ -105,8 +122,6 @@ function closePopup(popup) {
 
 
 // ...To-Do List...
-
-//    modify the bookList hasRead property
 
 // remove button removes the object from bookList array 
 //    remove the article element from DOM
