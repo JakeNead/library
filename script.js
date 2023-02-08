@@ -8,17 +8,22 @@ const read = document.getElementById('read')
 
 const hasReadClick = () => {
   const readButton = document.querySelectorAll('.readButton')
-  const el = readButton[readButton.length -1]
-  el.addEventListener('click', () => {
-  if (el.textContent === 'Read') {
-    el.classList.remove('hasRead')
-    el.classList.add('hasNotRead')
-    el.textContent = 'Not Read'
+  const e = readButton[readButton.length -1]
+  e.addEventListener('click', () => {
+  if (e.textContent === 'Read') {
+    e.classList.remove('hasRead')
+    e.classList.add('hasNotRead')
+    e.textContent = 'Not Read'
   } else {
-    el.classList.remove('hasNotRead')
-    el.classList.add('hasRead')
-    el.textContent = 'Read'
-  } 
+    e.classList.remove('hasNotRead')
+    e.classList.add('hasRead')
+    e.textContent = 'Read'
+  }
+  if (e.textContent === 'Read') {
+    // change bookList array to turn hasRead to false
+    // else the oposite
+  }
+  console.log(e)
   })
 }
 
@@ -51,7 +56,7 @@ form.addEventListener('submit', (e) => {
       div.textContent = userInputArray[i]
       newArticle.append(div)
       }
-      
+
     newArticle.setAttribute('data-index', bookList.length -1)
 
     const button = document.createElement('button')
