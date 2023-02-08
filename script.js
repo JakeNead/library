@@ -51,7 +51,9 @@ form.addEventListener('submit', (e) => {
       div.textContent = userInputArray[i]
       newArticle.append(div)
       }
-        
+      
+    newArticle.setAttribute('data-index', bookList.length -1)
+
     const button = document.createElement('button')
     button.setAttribute('class', 'remove')
     button.textContent = 'Remove'
@@ -99,7 +101,6 @@ function closePopup(popup) {
 
 // ...To-Do List...
 
-// toggle the read button style/text content
 //    modify the bookList hasRead property
 
 // remove button removes the object from bookList array 
