@@ -39,7 +39,6 @@ const hasReadClick = () => {
   }
   })
 }
-
 hasReadClick()
 
 const removeBookClick = () => {
@@ -91,8 +90,6 @@ form.addEventListener('submit', (e) => {
   }
 )
 
-
-// Start of popup user input code
 const openPopupButtons = document.querySelectorAll('[data-popup-target]')
 const overlay = document.getElementById('overlay')
 
@@ -118,12 +115,3 @@ function closePopup(popup) {
     popup.classList.remove('active')
     overlay.classList.remove('active')
 }
-// End of popup user input code
-
-
-// ...To-Do List...
-
-// remove button removes the object from bookList array 
-//    remove the article element from DOM
-
-// create light/dark theme button
