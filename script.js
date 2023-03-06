@@ -3,19 +3,24 @@ const title = document.getElementById('title')
 const author = document.getElementById('author')
 const pages = document.getElementById('pages')
 const read = document.getElementById('read')
+const popup = document.querySelector('.popup.active')
+const articleContainer = document.querySelector(".articleContainer")
 
 const bookList = [{
   title: 'Sample Book Title',
   author: 'Author\'s Name',
   pages: 1234,
-
+  hasRead: true
 }]
 
-function Book(bookTitle, bookAuthor, pageNumber, hasReadBook) {
-  this.title = bookTitle
-  this.author = bookAuthor
-  this.pageNumber = pageNumber
-  this.hasRead = hasReadBook
+class Book {
+  constructor (bookTitle, bookAuthor, pageNumber, hasReadBook) {
+    this.title = bookTitle
+    this.author = bookAuthor
+    this.pageNumber = pageNumber
+    this.hasRead = hasReadBook
+  }
+  
 }
 
 const hasReadClick = () => {
@@ -45,7 +50,7 @@ const removeBookClick = () => {
   const remove = document.querySelectorAll('.remove')
   const e = remove[remove.length-1]
   e.addEventListener('click', () => { 
-    if(confirm('Are you sure you want to permanently remove this book?')) {
+    if(window.confirm('Are you sure you want to permanently remove this book?')) {
       bookList.splice(e.parentElement.getAttribute('data-index'))
       e.parentElement.remove()
     }
@@ -53,13 +58,12 @@ const removeBookClick = () => {
 )}
 removeBookClick()
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', e => {
   e.preventDefault();
   bookList.push(new Book(title.value, author.value, pages.value, read.checked));
 
-    const articleContainer = document.querySelector(".articleContainer")
+
     const newArticle = document.createElement("article")
-  
     articleContainer.appendChild(newArticle)
 
     const userInputArray = [title.value, author.value, pages.value, (read.checked ? 'Read': 'Not Read')]
@@ -79,7 +83,7 @@ form.addEventListener('submit', (e) => {
     button.textContent = 'Remove'
     newArticle.append(button)
 
-    const popup = document.querySelector('.popup.active')
+   
     closePopup(popup)
     title.value = ''
     author.value = ''
