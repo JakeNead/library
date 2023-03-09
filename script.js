@@ -1,12 +1,22 @@
 /* eslint-disable no-use-before-define */
 
 const library = {
-  bookList: [{
-    title: 'Sample Book Title',
+  bookList: [
+    {title: 'Sample Book Title',
     author: 'Author\'s Name',
     pages: 1234,
     hasRead: true
-  }],
+    }, 
+    {title: 'Sample Book Title',
+    author: 'Author\'s Name',
+    pages: 1234,
+    hasRead: true
+    },
+    {title: 'Sample Book Title',
+    author: 'Author\'s Name',
+    pages: 1234,
+    hasRead: true},
+],
 
   init() {
     this.cacheDom()
@@ -19,8 +29,10 @@ const library = {
     this.pages = document.getElementById('pages')
     this.read = document.getElementById('read')
     this.articleContainer = document.querySelector(".articleContainer")
-    this.newArticle = document.createElement("article")
-    this.button = document.createElement('button')
+    this.popupButton = document.querySelector('[data-popup-target]')
+    this.popup = document.querySelector('.popup.active')
+    this.overlay = document.getElementById('overlay')
+
   },  
   render() {
     this.clearPage(this.articleContainer)
@@ -31,9 +43,14 @@ const library = {
     this.form.addEventListener('submit', e => {
       const book = new Book(e.title.value, e.author.value, e.pages.value, e.read.checked)
       this.render()
-    }) 
+    })
+    this.popupButton.addEventListener('click', () => {
+      this.openPopup()
+    })
+    this.overlay.addEventListener('click', () => {
+      this.closePopup()
+    })
   },
-
   clearPage(node) {
     while(node.firstChild) {
       node.removeChild(node.firstChild)
@@ -42,6 +59,7 @@ const library = {
   addBookElements() { 
     let n = 0
     this.bookList.forEach(book => {    
+      this.newArticle = document.createElement("article")
       this.articleContainer.appendChild(this.newArticle)   
       const divContent = [book.title, book.author, book.pages, book.hasRead]
       const articleClasses = ['title', 'author', 'pages', (book.hasRead ? 'readButton hasRead': 'readButton hasNotRead')]
@@ -53,16 +71,22 @@ const library = {
         this.newArticle.append(div)
       }
     this.newArticle.setAttribute('data-index', (n+=1) )
-    this.addRemoveButton()
+    const button = document.createElement('button')
+    button.setAttribute('class', 'remove')
+    button.textContent = 'Remove'
+    this.newArticle.append(button)
     })
   },
-
-  addRemoveButton() {
-    this.button.setAttribute('class', 'remove')
-    this.button.textContent = 'Remove'
-    return this.newArticle.append(this.button)
-  }
-
+  openPopup(popup) {
+    if (popup == null) return 
+      popup.classList.add('active')
+      this.overlay.classList.add('active')
+  },
+  closePopup(popup) {
+      if (popup == null) return 
+        this.popup.classList.remove('active')
+        this.overlay.classList.remove('active')
+    }
 }
 
 class Book {
