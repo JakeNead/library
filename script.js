@@ -30,9 +30,8 @@ const library = {
     this.read = document.getElementById('read')
     this.articleContainer = document.querySelector(".articleContainer")
     this.popupButton = document.querySelector('[data-popup-target]')
-    this.popup = document.querySelector('.popup.active')
+    this.popup = document.querySelector('.popup')
     this.overlay = document.getElementById('overlay')
-
   },  
   render() {
     this.clearPage(this.articleContainer)
@@ -41,18 +40,20 @@ const library = {
   },
   bindEvents() {
     this.form.addEventListener('submit', e => {
-      const book = new Book(e.title.value, e.author.value, e.pages.value, e.read.checked)
+      e.preventDefault()
+      this.bookList.push(new Book(title.value, author.value, pages.value, read.checked))
       this.render()
     })
     this.popupButton.addEventListener('click', () => {
-      this.openPopup()
+      this.openPopup(this.popup)
     })
     this.overlay.addEventListener('click', () => {
-      this.closePopup()
+      this.closePopup(this.popup)
     })
+      this.readToggle()
   },
   clearPage(node) {
-    while(node.firstChild) {
+    while(node.hasChildNodes()) {
       node.removeChild(node.firstChild)
     }
   },
@@ -61,7 +62,7 @@ const library = {
     this.bookList.forEach(book => {    
       this.newArticle = document.createElement("article")
       this.articleContainer.appendChild(this.newArticle)   
-      const divContent = [book.title, book.author, book.pages, book.hasRead]
+      const divContent = [book.title, book.author, book.pages, book.hasRead ? 'Read': 'Has not read']
       const articleClasses = ['title', 'author', 'pages', (book.hasRead ? 'readButton hasRead': 'readButton hasNotRead')]
     
       for (let i = 0; i < divContent.length; i++) {
@@ -86,7 +87,23 @@ const library = {
       if (popup == null) return 
         this.popup.classList.remove('active')
         this.overlay.classList.remove('active')
-    }
+    },
+  readToggle(){
+    const readButton = document.querySelectorAll('.readButton')
+    readButton.forEach(btn => btn.addEventListener('click', () => {
+      if (btn.textContent === 'Read') {
+        btn.classList.remove('hasRead')
+        btn.classList.add('hasNotRead')
+        btn.textContent = 'Not Read'
+        this.bookList[btn.parentElement.getAttribute('data-index')-1].hasRead = false
+      } else {
+        btn.classList.remove('hasNotRead')
+        btn.classList.add('hasRead')
+        btn.textContent = 'Read'
+        this.bookList[btn.parentElement.getAttribute('data-index')-1].hasRead = true
+      } 
+      }))
+  }
 }
 
 class Book {
@@ -95,36 +112,10 @@ class Book {
     this.author = bookAuthor
     this.pageNumber = pageNumber
     this.hasRead = hasReadBook
-
-    library.bookList.push(this) // does this work?
   }
 }
 
 library.init()
-
-
-// const hasReadClick = () => {
-//   const readButton = document.querySelectorAll('.readButton')
-//   const e = readButton[readButton.length -1]
-//   e.addEventListener('click', () => {
-//   if (e.textContent === 'Read') {
-//     e.classList.remove('hasRead')
-//     e.classList.add('hasNotRead')
-//     e.textContent = 'Not Read'
-//   } else {
-//     e.classList.remove('hasNotRead')
-//     e.classList.add('hasRead')
-//     e.textContent = 'Read'
-//   } 
-
-//   if (e.textContent === 'Not Read') {
-//     bookList[(e.parentElement.getAttribute('data-index'))].hasRead = false
-//   } else if (e.textContent === 'Read') {
-//     bookList[(e.parentElement.getAttribute('data-index'))].hasRead = true
-//   }
-//   })
-// }
-// hasReadClick()
 
 // const removeBookClick = () => {
 //   const remove = document.querySelectorAll('.remove')
