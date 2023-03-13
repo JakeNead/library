@@ -1,31 +1,21 @@
 /* eslint-disable no-use-before-define */
 
-// Current bugs
-//    New book article doesn't display pages
-//    adding multiple books creates exponential articles
+// Current bug
 //    removing books erases entire bookList array
 
-(function() {
+(() => {
   const library = {
     bookList: [
       {title: 'Sample Book Title',
       author: 'Author\'s Name',
-      pages: 1234,
+      pageNumber: 1234,
       hasRead: true
-      }, 
-      {title: 'Sample Book Title',
-      author: 'Author\'s Name',
-      pages: 1234,
-      hasRead: true
-      },
-      {title: 'Sample Book Title',
-      author: 'Author\'s Name',
-      pages: 1234,
-      hasRead: true},
+      }
     ],
 
     init() {
       this.cacheDom()
+      this.bindEvents()
       this.render()
     },
 
@@ -42,23 +32,20 @@
     },  
 
     render() {
-      this.clearPage(this.articleContainer)
+      this.clearPage()
       this.addBookElements()
-      this.bindEvents()
     },
 
     bindEvents() {
       this.form.addEventListener('submit', e => {
         e.preventDefault()
         this.bookList.push(new Book(title.value, author.value, pages.value, read.checked))
-        this.closePopup(popup)
-        this.render()
-      
         this.form.title.value = ''
         this.form.author.value = ''
         this.form.pages.value = ''
         this.form.read.checked = false
-        console.log(this.bookList)
+        this.closePopup(this.popup)
+        this.render()
       })
       this.popupButton.addEventListener('click', () => {
         this.openPopup(this.popup)
@@ -66,37 +53,38 @@
       this.overlay.addEventListener('click', () => {
         this.closePopup(this.popup)
       })
-      this.readToggle()
-      this.removeBook()
-
     },
 
-    clearPage(node) {
-      while(node.hasChildNodes()) {
-        node.removeChild(node.firstChild)
+    clearPage() {
+      while(this.articleContainer.hasChildNodes()) {
+        this.articleContainer.removeChild(this.articleContainer.firstChild)
       }
     },
 
     addBookElements() { 
-      let n = 0
+      let n = -1
       this.bookList.forEach(book => {    
-        this.newArticle = document.createElement("article")
-        this.articleContainer.appendChild(this.newArticle)   
-        const divContent = [book.title, book.author, book.pages, book.hasRead ? 'Read': 'Has not read']
+        const newArticle = document.createElement("article")
+        newArticle.setAttribute('data-index', (n+=1) )
+        this.articleContainer.appendChild(newArticle)
+
+        const divContent = [book.title, book.author, book.pageNumber, (book.hasRead ? 'Read': 'Has not read')]
         const articleClasses = ['title', 'author', 'pages', (book.hasRead ? 'readButton hasRead': 'readButton hasNotRead')]
       
-        for (let i = 0; i < divContent.length; i++) {
+        for (let i = 0; i < divContent.length; i+=1) {
           const div = document.createElement('div')
           div.setAttribute('class', articleClasses[i])
           div.textContent = divContent[i]
-          this.newArticle.append(div)
+          newArticle.append(div)
         }
-      this.newArticle.setAttribute('data-index', (n+=1) )
+      
       const button = document.createElement('button')
       button.setAttribute('class', 'remove')
       button.textContent = 'Remove'
-      this.newArticle.append(button)
+      newArticle.append(button)
       })
+      this.readToggle()
+      this.removeBook()
     },
 
     openPopup(popup) {
@@ -118,12 +106,12 @@
           btn.classList.remove('hasRead')
           btn.classList.add('hasNotRead')
           btn.textContent = 'Not Read'
-          this.bookList[btn.parentElement.getAttribute('data-index')-1].hasRead = false
+          this.bookList[btn.parentElement.getAttribute('data-index')].hasRead = false
         } else {
           btn.classList.remove('hasNotRead')
           btn.classList.add('hasRead')
           btn.textContent = 'Read'
-          this.bookList[btn.parentElement.getAttribute('data-index')-1].hasRead = true
+          this.bookList[btn.parentElement.getAttribute('data-index')].hasRead = true
         } 
         }))
     },
@@ -131,12 +119,11 @@
     removeBook () {
       const remove = document.querySelectorAll('.remove')
       remove.forEach(btn => btn.addEventListener('click', () => {
-        
-        if (window.confirm('Are you sure you want to permanently remove this book?')) {
-          this.bookList.splice(btn.parentElement.getAttribute('data-index')-1)
+        if (window.confirm('Are you sure you want to permanently remove this book?')){
+          this.bookList.splice(btn.parentElement.getAttribute('data-index'))
           btn.parentElement.remove()
         }
-        console.log(library.bookList)
+        console.log(this.bookList)
       })
     )}
   }
