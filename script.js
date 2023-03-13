@@ -1,8 +1,5 @@
 /* eslint-disable no-use-before-define */
 
-// Current bug
-//    removing books erases entire bookList array
-
 (() => {
   const library = {
     bookList: [
@@ -111,7 +108,7 @@
           btn.classList.remove('hasNotRead')
           btn.classList.add('hasRead')
           btn.textContent = 'Read'
-          this.bookList[btn.parentElement.getAttribute('data-index')].hasRead = true
+          this.bookList[btn.parentElement.getAttribute('data-index')].hasRead = true 
         } 
         }))
     },
@@ -120,10 +117,10 @@
       const remove = document.querySelectorAll('.remove')
       remove.forEach(btn => btn.addEventListener('click', () => {
         if (window.confirm('Are you sure you want to permanently remove this book?')){
-          this.bookList.splice(btn.parentElement.getAttribute('data-index'))
-          btn.parentElement.remove()
+          this.bookList.splice(btn.parentElement.getAttribute('data-index'),1)
+          this.render()
         }
-        console.log(this.bookList)
+        console.log(btn.parentElement.getAttribute('data-index'))
       })
     )}
   }
@@ -138,57 +135,3 @@ class Book {
     this.hasRead = hasReadBook
   }
 }
-
-
-// const removeBookClick = () => {
-//   const remove = document.querySelectorAll('.remove')
-//   const e = remove[remove.length-1]
-//   e.addEventListener('click', () => { 
-//     if(window.confirm('Are you sure you want to permanently remove this book?')) {
-//       bookList.splice(e.parentElement.getAttribute('data-index'))
-//       e.parentElement.remove()
-//     }
-//   }
-// )}
-// removeBookClick()
-
-// form.addEventListener('submit', e => {
-//   e.preventDefault();
-//   bookList.push(new Book(title.value, author.value, pages.value, read.checked))
-
-//     closePopup(popup)
-//     title.value = ''
-//     author.value = ''
-//     pages.value = ''
-//     read.checked = false
-//     hasReadClick()
-//     removeBookClick()
-//   }
-// )
-
-// const openPopupButtons = document.querySelectorAll('[data-popup-target]')
-// const overlay = document.getElementById('overlay')
-
-// openPopupButtons.forEach(button => {
-//   button.addEventListener('click', () => {
-//     const popup = document.querySelector(button.dataset.popupTarget)
-//     openPopup(popup)
-//   })
-// })
-// overlay.addEventListener('click', () => {
-//   const popups = document.querySelector('.popup.active')
-//   closePopup(popups)
-// })
-// function openPopup(popup) {
-//   if (popup == null) return 
-//     popup.classList.add('active')
-//     overlay.classList.add('active')
-// }
-// function closePopup(popup) {
-//   if (popup == null) return 
-//     popup.classList.remove('active')
-//     overlay.classList.remove('active')
-// }
-
-// _________________________________________________________________
-
