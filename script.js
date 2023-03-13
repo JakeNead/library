@@ -120,7 +120,6 @@
           this.bookList.splice(btn.parentElement.getAttribute('data-index'),1)
           this.render()
         }
-        console.log(btn.parentElement.getAttribute('data-index'))
       })
     )}
   }
